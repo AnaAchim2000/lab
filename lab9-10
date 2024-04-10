@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laborator 9-10- Cookies</title>
+    <style>
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* Spatiu între butoane */
+        }
+        .button {
+            background-color: #4287f5; /* Verde */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cookies </h1>
+
+    <div class="button-container">
+        <button class="button" onclick="alertCookie()">Afiseare cookiele</button>
+        <button class="button" onclick="setCookie()">Seteaza cookie-urile</button>
+        <button class="button" onclick="alert(showCookies())">Arata cookie-uri</button>
+        <button class="button" onclick="alert(clearCookies())">Curata cookie-uri</button>
+        <button class="button" onclick="resetOnce()">Reseteaza </button>
+        <button class="button" onclick="alert(checkACookieExists())">Existenta cookie-ului reader</button>
+        <button class="button" onclick="alert(checkCookieHasASpecificValue())">Verifica valoarea cookie-ului reader</button>
+    </div>
+
+    <script>
+           document.cookie = "session=test GDPR; path=/; SameSite=Lax; Secure";
+        document.cookie = "favorite_task=collect Data; path=/; SameSite=Lax; Secure";
+
+        function alertCookie() {
+            alert(document.cookie); 
+        }
+
+        function setCookie() {
+            document.cookie = "name=oeschger; SameSite=None; Secure";
+            document.cookie = "favorite_food=tripe; SameSite=None; Secure";
+            document.cookie = "test1=Hello; SameSite=None; Secure";
+            document.cookie = "test2=World; SameSite=None; Secure";
+            document.cookie = "reader=1; SameSite=None; Secure";
+            document.cookie = "doSomethingOnlyOnce=true; expires=Fri, 01 Jan 1970 00:00:00 GMT; SameSite=None; Secure";
+            alert('Cookies set!'); 
+        }
+
+        function showCookies() {
+            return 'Cookies: ' + document.cookie;
+        }
+
+        function clearCookies() {
+            return 'Cookies cleared!';
+        }
+
+        function resetOnce() {
+            document.cookie = "doSomethingOnlyOnce=; expires=Thu, 1 Jan 1970 00:00:00 GMT; SameSite=None; Secure";
+            alert('Reset doSomethingOnlyOnce cookie!');
+        }
+
+        function checkACookieExists() {
+            return document.cookie.split("; ").some((item) => item.trim().startsWith("reader=")) ?
+                'The cookie "reader" exists' : 'The cookie "reader" does not exist';
+        }
+
+        function checkCookieHasASpecificValue() {
+            return document.cookie.split("; ").some((item) => item.includes("reader=1")) ?
+                'The cookie "reader" has a value of "1"' : 'The cookie "reader" does not have the value "1"';
+        }
+
+    </script>
+</body>
+</html>
